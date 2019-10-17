@@ -1,0 +1,11 @@
+CMakeCache.txt
+CMakeDoxyfile.in
+CMakeDoxygenDefaults.cmake
+CMakeFiles/
+Doxyfile.doxygen
+Makefile
+cmake_install.cmake
+decode
+genPlots
+testCT
+testFTCom
