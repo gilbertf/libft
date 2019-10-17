@@ -1,0 +1,21 @@
+digraph G {
+	START_0 -> START_1 [label="out(0, 8)"];
+	
+	START_1 -> START_2 [label="txRole == MASTER\nout(1, 9)"];
+	START_1 -> START_2 [label="txRole == SLAVE\nout(1, 4)"];
+	
+	START_2 -> BIT_HALF [label="bit == 0\nout(0, 2)"]
+	START_2 -> BIT_FULL [label="bit == 1\nout(0, 4)"]
+	
+	BIT_HALF -> BIT_FULL [label="out(bit^1, 2)"]
+	
+	BIT_FULL -> BIT_HALF [label="hasNext(); last == bit\nout(bit, 2)"]
+	BIT_FULL -> BIT_FULL [label="hasNext(); last != bit\nout(bit^1, 4)"]
+	BIT_FULL -> STOP_0 [label="!hasNext();bit == 0\nout(bit, 8)"]
+	BIT_FULL -> TX_WAIT_DATA [label="!hasNext(); bit == 1\nout(bit, 8)"]
+	
+	STOP_0 -> TX_WAIT_DATA [label="out(1, 0)"]
+
+	START_2 [label="START_2\nhasNext()\nlast = bit; bit = getNext()"]
+	BIT_FULL [label="BIT_FULL\nhasNext()\nlast = bit; bit = getNext()"]
+}

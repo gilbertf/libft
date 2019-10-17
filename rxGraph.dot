@@ -1,0 +1,22 @@
+digraph G {
+	START_0 -> START_1 [label="duration == 8"]
+
+	START_1 -> START_2 [label="duration == 4\nrxRole = SLAVE"]
+	START_1 -> START_2 [label="duration == 9\nrxRole = MASTER"]
+	START_1 -> START_0 [label="else"]
+
+	START_2 -> BIT_HALF [label="duration == 2"]
+	START_2 -> BIT_FULL [label="duration == 4\nsetNextBitInv(1)"]
+	START_2 -> START_0 [label="else"]
+
+	BIT_HALF -> BIT_FULL [label="duration == 2\nsetNextBitInv(0)"]
+	BIT_HALF -> START_0 [label="else"]
+
+	BIT_FULL -> BIT_HALF [label="duration == 2"]
+	BIT_FULL -> BIT_FULL [label="duration == 4\nsetNextBitInv(1)"]
+	BIT_FULL-> STOP [label="lastBit == 0; duration == 8; bitCnt % 8 == 0"]
+	BIT_FULL-> RX_WAIT_DATA [label="lastBit == 1; duration >= 8; bitCnt % 8 == 0"]
+	BIT_FULL -> START_0 [label="else"]
+
+	STOP -> RX_WAIT_DATA
+}
