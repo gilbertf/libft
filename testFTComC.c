@@ -8,9 +8,8 @@ bool simUpdate(const uint8_t pinState, const uint8_t cycles) {
 int main() {
 	struct FTCom* ftcom = newFTCom(&simUpdate);
 
-	//uint8_t txData[tx->maxNumBytes];
+	uint8_t txData[FTCom_getMaxNumBytes(ftcom)];
 	uint8_t numTxBytes = 3;
-	uint8_t txData[numTxBytes];
 	txData[0] = 23;
 	txData[1] = 33;
 	txData[2] = 43;
