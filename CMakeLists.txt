@@ -21,3 +21,5 @@ add_executable(genPlots ftcom.cpp genPlots.cpp)
 add_executable(testCT ct.cpp ftcom.cpp testCT.cpp)
 add_executable(testFTCom ct.cpp ftcom.cpp testFTCom.cpp)
 add_executable(decode ftcom.cpp decode.cpp)
+
+add_executable(testFTComC ftcom.cpp testFTComC.c)

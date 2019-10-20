@@ -15,15 +15,15 @@ class FTCom {
 		/** State of the transceiver */
 		enum State : uint8_t {
 			/** Ready for transmitting and receiving */
-			IDLE,
+			IDLE = 0,
 			/** Receiving or waiting for user to read received data */
-			TRANSMITTING,
+			TRANSMITTING = 1,
 			/** Transmitting */
-			RECEIVING,
+			RECEIVING = 2,
 			/** Collision detected by user routine updatePinTimer when testing bus before changing its state */
-			TX_COLLISION,
+			TX_COLLISION = 3,
 			/** Better, this never happens */
-			INVALID_STATE
+			INVALID_STATE = 4
 		};
 
 		/** Allowed maximum is 32, due to bitIdx variable definition */

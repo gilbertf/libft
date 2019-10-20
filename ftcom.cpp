@@ -3,6 +3,31 @@
 
 using namespace std;
 
+extern "C" {
+	FTCom* newFTCom(bool (*updatePinTimer)(const uint8_t pinState, const uint8_t duration)) {
+		return new FTCom(updatePinTimer);
+	}
+
+	void deleteFTCom(FTCom* ftcom) {
+		delete ftcom;
+	}
+
+
+	void FTCom_timeElapsed(FTCom* ftcom) {
+		ftcom->timeElapsed();
+	}
+
+	bool FTCom_transmit(FTCom* ftcom, const uint8_t* data, const uint8_t numBytes) {
+		return ftcom->transmit(data, numBytes);
+	}
+
+	uint8_t FTCom_getState(FTCom* ftcom) {
+		return ftcom->getState();
+	}
+
+}
+
+
 FTCom::FTCom(bool(*updatePinTimerIn)(uint8_t , uint8_t), const Role txRoleIn, const uint8_t rxOFIn) {
 	/*** Tx ***/
 	txRole = txRoleIn;
