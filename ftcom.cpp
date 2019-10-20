@@ -21,8 +21,16 @@ extern "C" {
 		return ftcom->transmit(data, numBytes);
 	}
 
+	void FTCom_setTxRole(FTCom* ftcom, uint8_t role) {
+		ftcom->setTxRole((FTCom::Role) role);
+	}
+
 	uint8_t FTCom_getState(FTCom* ftcom) {
 		return ftcom->getState();
+	}
+
+	uint8_t FTCom_getMaxNumBytes(FTCom* ftcom) {
+		return ftcom->maxNumBytes;
 	}
 
 }
@@ -189,6 +197,8 @@ int8_t FTCom::nextEdge(const uint16_t duration) {
 		case STOP:
 			rxState = WAIT_DATA;
 			return rxBitIdx / 8;
+		default:
+			break;
 	}
 	return 0;
 }
@@ -290,6 +300,8 @@ void FTCom::timeElapsed() {
 			if (!updatePinTimer(1, 0)) {
 				txState = COLLISION;
 			}
+			break;
+		default:
 			break;
 	}
 }
